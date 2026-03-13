@@ -1,0 +1,41 @@
+; NVT equilibration 100 ps
+integrator  = md
+dt          = 0.002
+nsteps      = 50000    ; 100 ps
+continuation = no
+constraints = h-bonds
+constraint_algorithm = lincs
+
+; Output
+nstxout     = 0
+nstvout     = 0
+nstfout     = 0
+nstxout-compressed = 5000
+nstenergy   = 5000
+nstlog      = 5000
+
+; Neighbor searching
+nstlist     = 10
+cutoff-scheme = Verlet
+ns_type     = grid
+pbc         = xyz
+
+; Electrostatics
+coulombtype = PME
+rcoulomb    = 1.2
+fourierspacing = 0.12
+
+; VdW
+rvdw        = 1.2
+DispCorr    = EnerPres
+
+; Temperature coupling
+tcoupl      = V-rescale
+tc-grps     = Protein_GDP Non-Protein
+tau_t       = 0.1   0.1
+ref_t       = 300   300
+
+; Velocity generation
+gen_vel     = yes
+gen_temp    = 300
+gen_seed    = -1
